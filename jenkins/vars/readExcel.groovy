@@ -2,7 +2,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import org.apache.poi.ss.usermodel.*
 
 def call(String filePath) {
-    def excelData = [:]
+    def serverDetails = [:]
     def file = new File(filePath)
     def workbook = new XSSFWorkbook(file)
     def sheet = workbook.getSheetAt(0)
@@ -14,10 +14,9 @@ def call(String filePath) {
             headers.eachWithIndex { header, idx ->
                 rowData[header] = row.getCell(idx).toString()
             }
-            excelData[row.getRowNum()] = rowData
+            serverDetails[row.getRowNum()] = rowData
         }
     }
     workbook.close()
-    return excelData
+    return serverDetails
 }
-
